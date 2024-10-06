@@ -14,6 +14,7 @@ coroutinesVersion = "1.8.1"
 orbit = "9.0.0"
 kamel = "0.9.5"
 sqlDelight = "2.0.1"
+konnectivityVersion = "0.1-alpha01"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -43,6 +44,8 @@ delight-ios = { module = "app.cash.sqldelight:native-driver", version.ref = "sql
 delight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sqlDelight" }
 delight-extension = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 delight-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+
+konnectivity = {module = "com.plusmobileapps:konnectivity", version.ref = "konnectivityVersion"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -73,6 +73,8 @@ kotlin {
 
             implementation(libs.delight.runtime)
             implementation(libs.delight.extension)
+
+            implementation(libs.konnectivity)
         }
 
         iosMain.dependencies {

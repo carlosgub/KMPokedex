@@ -8,6 +8,7 @@ import com.carlosgub.pokedex.data.repository.PokemonRepositoryImpl
 import com.carlosgub.pokedex.domain.repository.PokemonRepository
 import com.carlosgub.pokedex.domain.usecase.GetPokemonListUseCase
 import com.carlosgub.pokedex.presentation.viewmodel.home.HomeViewModel
+import com.plusmobileapps.konnectivity.Konnectivity
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
@@ -28,6 +29,7 @@ val appModule = module {
         PokemonRepositoryImpl(
             pokemonRemoteDataSource = get(),
             pokemonLocalDataSource = get(),
+            konnectivity = get()
         )
     }
 
@@ -55,6 +57,12 @@ val sqlDelightModule = module {
     single { SharedDatabase(get()) }
 }
 
+val connectivityModule = module {
+    single { Konnectivity() }
+}
+
+expect fun platformModule(): Module
+
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
     startKoin {
         appDeclaration()
@@ -62,10 +70,9 @@ fun initKoin(appDeclaration: KoinAppDeclaration = {}) =
             appModule,
             networkModule,
             sqlDelightModule,
+            connectivityModule,
             platformModule()
         )
     }
-
-expect fun platformModule(): Module
 
 fun initKoin() = initKoin {}
