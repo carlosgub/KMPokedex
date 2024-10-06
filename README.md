@@ -1,14 +1,25 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+## This is the repo will be used to my talk in Android Dev Fest 2024
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+![Image Preview](https://github.com/carlosgub/carlosgub.dev/blob/develop/design/readme_preview.webp)
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Getting Started
 
+* Read the [README](https://github.com/varabyte/kobweb/blob/main/README.md) from the Kobweb repository to install the Kobweb binary.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…# KMPokedex
+* Run the development server by typing the following command in a terminal under the `site` folder:
+
+```bash
+$ cd site
+$ kobweb run
+```
+
+* Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
+
+You can use any editor you want for the project, but we recommend using **IntelliJ IDEA Community Edition** downloaded
+using the [Toolbox App](https://www.jetbrains.com/toolbox-app/).
+
+Press `Q` in the terminal to gracefully stop the server.
+
+# Credits
+* This project use [Kobweb](https://github.com/varabyte/kobweb) 
+* Inspired by  [Brittany Chiang](https://v3.brittanychiang.com) and [Kristina Volchek](https://kristi.digital)
