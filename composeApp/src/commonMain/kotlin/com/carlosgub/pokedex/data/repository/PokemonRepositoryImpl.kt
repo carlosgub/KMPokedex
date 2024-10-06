@@ -8,6 +8,6 @@ class PokemonRepositoryImpl(
     private val pokemonRemoteDataSource: PokemonRemoteDataSource,
 ) : PokemonRepository {
     override suspend fun getPokemonList(): List<PokemonModel> =
-        pokemonRemoteDataSource.getPokemonList()
+        pokemonRemoteDataSource.getPokemonList().pokemonList
 
 }

@@ -10,7 +10,7 @@ class PokemonRemoteDataSource(
     private val httpClient: HttpClient
 ) {
 
-    suspend fun getPokemonList(): List<PokemonModel> =
-        httpClient.get("https://github.com/Purukitto/pokemon-data.json/blob/master/pokedex.json").body()
+    suspend fun getPokemonList(): PokemonListModel =
+        httpClient.get("https://raw.githubusercontent.com/carlosgub/KMPokedex/refs/heads/main/json/Pokemon.json").body()
 
 }

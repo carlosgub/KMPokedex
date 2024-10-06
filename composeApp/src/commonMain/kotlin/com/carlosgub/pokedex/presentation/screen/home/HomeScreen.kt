@@ -105,11 +105,11 @@ private fun PokemonItem(pokemon: PokemonModel) {
                     )
             ) {
                 Text(
-                    text = pokemon.names.english.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
+                    text = pokemon.name.english.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
-                pokemon.typeList?.forEach { type ->
+                pokemon.type.forEach { type ->
                     Text(
                         text = type,
                         color = Color.White,
