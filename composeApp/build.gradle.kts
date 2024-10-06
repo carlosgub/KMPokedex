@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.sqldelight)
 }
 
 kotlin {
@@ -40,6 +41,8 @@ kotlin {
 
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
+
+            implementation(libs.delight.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -67,10 +70,14 @@ kotlin {
             implementation(libs.koin.composeVM)
 
             api(libs.orbit.core)
+
+            implementation(libs.delight.runtime)
+            implementation(libs.delight.extension)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.delight.ios)
         }
     }
 }
@@ -109,6 +116,15 @@ android {
     }
     dependencies {
         debugImplementation(compose.uiTooling)
+    }
+
+    sqldelight {
+        databases {
+            create("Database") {
+                packageName.set("com.carlosgub.pokedex")
+                generateAsync.set(true)
+            }
+        }
     }
 }
 

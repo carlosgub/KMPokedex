@@ -1,0 +1,16 @@
+CREATE TABLE Pokemon (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name Text NOT NULL,
+  image Text NOT NULL,
+  type TEXT NOT NULL,
+  color INTEGER NOT NULL
+);
+
+CREATE INDEX pokemon_id ON Pokemon(id);
+
+getPokemonList:
+    SELECT * FROM Pokemon;
+
+insert:
+    INSERT INTO Pokemon
+    VALUES(?,?,?,?,?);
