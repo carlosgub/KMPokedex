@@ -3,11 +3,13 @@
 package com.carlosgub.pokedex.presentation.screen.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -22,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +32,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.memory.MemoryCache
+import coil3.request.ImageRequest
 import com.carlosgub.pokedex.domain.model.PokemonModel
 import com.carlosgub.pokedex.presentation.viewmodel.home.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -88,7 +96,9 @@ private fun PokemonList(list: List<PokemonModel>) {
 @Composable
 private fun PokemonItem(pokemon: PokemonModel) {
     Card(
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxSize(),
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.DarkGray
         )
@@ -104,8 +114,11 @@ private fun PokemonItem(pokemon: PokemonModel) {
                         vertical = 18.dp,
                     )
             ) {
+                PokemonImage(
+                    url = pokemon.image.thumbnail
+                )
                 Text(
-                    text = pokemon.name.english.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() },
+                    text = pokemon.name.english,
                     color = Color.White,
                     fontWeight = FontWeight.Bold
                 )
@@ -132,9 +145,6 @@ private fun PokemonItem(pokemon: PokemonModel) {
                 }
 
             }
-            PokemonImage(
-                url = pokemon.image.thumbnail
-            )
         }
     }
 }
@@ -144,10 +154,13 @@ private fun PokemonImage(
     url: String,
     modifier: Modifier = Modifier,
 ) {
-    coil3.compose.AsyncImage(
-        modifier = modifier,
-        model = url,
+    AsyncImage(
+        model = ImageRequest.Builder(LocalPlatformContext.current)
+            .data(url)
+            .build(),
         contentDescription = null,
+        modifier = Modifier
+            .size(40.dp)
     )
 }
 

@@ -24,10 +24,11 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 @Preview
 fun App() {
     val navController: NavHostController = rememberNavController()
+    setSingletonImageLoaderFactory { context ->
+        getAsyncImageLoader(context)
+    }
     MaterialTheme {
-        setSingletonImageLoaderFactory { context ->
-            getAsyncImageLoader(context)
-        }
+
         NavHost(
             navController = navController,
             startDestination = PokedexScreen.Home.name,

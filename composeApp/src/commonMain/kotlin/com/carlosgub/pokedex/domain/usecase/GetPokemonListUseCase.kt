@@ -12,7 +12,6 @@ class GetPokemonListUseCase(
 ) {
     suspend operator fun invoke(): List<PokemonModel> =
         withContext(Dispatchers.IO) {
-            delay(2000)
             pokemonRepository.getPokemonList()
         }
 
