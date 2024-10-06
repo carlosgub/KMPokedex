@@ -1,6 +1,6 @@
 package com.carlosgub.pokedex.presentation.navigation
 
-enum class PokedexScreen() {
+enum class PokedexScreen {
     Home,
     Detail,
 }
