@@ -5,21 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PokemonModel(
     val id: Int,
-    val name: NameModel,
-    val image: ImageModel,
+    val name: String,
+    val image: String,
     val type: List<String>,
     val color: Long,
-) {
-    @Serializable
-    data class NameModel(
-        val english: String,
-        val japanese: String,
-        val chinese: String,
-        val french: String,
-    )
-
-    @Serializable
-    data class ImageModel(
-        val thumbnail: String
-    )
-}
+)

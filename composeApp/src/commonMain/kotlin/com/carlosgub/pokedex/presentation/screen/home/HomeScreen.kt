@@ -114,7 +114,7 @@ private fun PokemonItem(
             modifier = Modifier.fillMaxSize(),
         ) {
             PokemonImage(
-                url = pokemon.image.thumbnail,
+                url = pokemon.image,
                 modifier = Modifier.align(Alignment.BottomEnd)
             )
             PokemonInformation(pokemon)
@@ -133,7 +133,7 @@ private fun PokemonInformation(pokemon: PokemonModel) {
             )
     ) {
         Text(
-            text = pokemon.name.english,
+            text = pokemon.name,
             color = Color.White,
             fontWeight = FontWeight.Bold
         )

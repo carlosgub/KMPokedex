@@ -5,21 +5,10 @@ import com.carlosgub.pokedex.domain.model.PokemonModel
 
 fun PokemonResponse.toPokemonModel() = PokemonModel(
     id = this.id,
-    name = this.name.toNameModel(),
+    name = this.name.english,
     color = this.getColor(),
-    image = this.image.toImageModel(),
+    image = this.image.thumbnail,
     type = this.type
-)
-
-private fun PokemonResponse.NameResponse.toNameModel() = PokemonModel.NameModel(
-    english = this.english,
-    japanese = this.japanese,
-    chinese = this.chinese,
-    french = this.french
-)
-
-private fun PokemonResponse.ImageResponse.toImageModel() = PokemonModel.ImageModel(
-    thumbnail = this.thumbnail
 )
 
 private fun PokemonResponse.getColor(): Long =
