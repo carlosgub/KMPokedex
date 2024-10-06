@@ -11,6 +11,6 @@ class PokemonRemoteDataSource(
 ) {
 
     suspend fun getPokemonList(): PokemonListModel =
-        httpClient.get("https://raw.githubusercontent.com/carlosgub/KMPokedex/refs/heads/main/json/Pokemon.json").body()
+        httpClient.get("https://github.com/carlosgub/KMPokedex/blob/main/json/Pokemon.json").body()
 
 }
