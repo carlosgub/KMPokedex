@@ -8,4 +8,5 @@
 
 # Credits
 * This project use [KMP](https://kotlinlang.org/docs/multiplatform.html)
-* Thanks for the related API's used in this proyect 
+* Thanks for the related API's used in this proyect [Purukitto](https://github.com/Purukitto/pokemon-data.json) [Repo](https://github.com/Purukitto/pokemon-data.json)
+* Inspired by this [Design](https://dribbble.com/shots/6540871-Pokedex-App)
