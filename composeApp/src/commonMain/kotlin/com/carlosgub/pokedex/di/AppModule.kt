@@ -7,7 +7,6 @@ import com.carlosgub.pokedex.data.datasource.remote.PokemonRemoteDataSource
 import com.carlosgub.pokedex.data.repository.PokemonRepositoryImpl
 import com.carlosgub.pokedex.domain.repository.PokemonRepository
 import com.carlosgub.pokedex.domain.usecase.GetPokemonListUseCase
-import com.carlosgub.pokedex.domain.usecase.SavePokemonListUseCase
 import com.carlosgub.pokedex.presentation.viewmodel.home.HomeViewModel
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
@@ -21,12 +20,6 @@ val appModule = module {
 
     factory {
         GetPokemonListUseCase(
-            pokemonRepository = get()
-        )
-    }
-
-    factory {
-        SavePokemonListUseCase(
             pokemonRepository = get()
         )
     }

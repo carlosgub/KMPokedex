@@ -2,6 +2,8 @@ package com.carlosgub.pokedex.data.repository.mapper
 
 import com.carlosgub.pokedex.data.datasource.remote.response.PokemonResponse
 import com.carlosgub.pokedex.domain.model.PokemonModel
+import kotlinx.serialization.json.Json
+import pokemon.Pokemon
 
 fun PokemonResponse.toPokemonModel() = PokemonModel(
     id = this.id,
@@ -9,6 +11,14 @@ fun PokemonResponse.toPokemonModel() = PokemonModel(
     color = this.getColor(),
     image = this.image.thumbnail,
     type = this.type
+)
+
+fun Pokemon.toPokemonModel() = PokemonModel(
+    id = this.id.toInt(),
+    name = this.name,
+    color = this.color,
+    image = this.image,
+    type = Json.decodeFromString<List<String>>(this.type)
 )
 
 private fun PokemonResponse.getColor(): Long =

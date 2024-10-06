@@ -10,12 +10,19 @@ class PokemonRepositoryImpl(
     private val pokemonRemoteDataSource: PokemonRemoteDataSource,
     private val pokemonLocalDataSource: PokemonLocalDataSource,
 ) : PokemonRepository {
-    override suspend fun getPokemonList(): List<PokemonModel> =
-        pokemonRemoteDataSource.getPokemonList().pokemonList.map { pokemonResponse ->
-            pokemonResponse.toPokemonModel()
+    override suspend fun getPokemonList(): List<PokemonModel> {
+        return if (true) {
+            val pokemonList = pokemonLocalDataSource.getPokemonList()
+            pokemonList.map { pokemon ->
+                    pokemon.toPokemonModel()
+                }
+        } else {
+            val pokemonList = pokemonRemoteDataSource.getPokemonList().pokemonList.map { pokemonResponse ->
+                pokemonResponse.toPokemonModel()
+            }
+            pokemonLocalDataSource.savePokemonList(pokemonList)
+            pokemonList
         }
-
-    override suspend fun savePokemonList(pokemonList: List<PokemonModel>) =
-        pokemonLocalDataSource.savePokemonList(pokemonList)
+    }
 
 }
