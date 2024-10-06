@@ -60,10 +60,7 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation(libs.coil.compose.core)
-            implementation(libs.coil.compose)
-            implementation(libs.coil.mp)
-            implementation(libs.coil.network.ktor)
+            implementation(libs.kamel)
 
             api(libs.koin.core)
             implementation(libs.koin.compose)

@@ -3,13 +3,16 @@
 package com.carlosgub.pokedex.presentation.screen.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -24,21 +27,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onPlaced
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.compose.SubcomposeAsyncImage
-import coil3.memory.MemoryCache
-import coil3.request.ImageRequest
 import com.carlosgub.pokedex.domain.model.PokemonModel
 import com.carlosgub.pokedex.presentation.viewmodel.home.HomeViewModel
+import io.kamel.image.KamelImage
+import io.kamel.image.asyncPainterResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -83,29 +87,53 @@ private fun HomeTopAppBar(
 
 @Composable
 private fun PokemonList(list: List<PokemonModel>) {
+    var desiredItemMinHeight by remember {
+        mutableStateOf(0.dp)
+    }
+
+    val density = LocalDensity.current
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         contentPadding = PaddingValues(8.dp),
+        modifier = Modifier.fillMaxSize()
     ) {
         items(list) { pokemon ->
-            PokemonItem(pokemon)
+            PokemonItem(
+                pokemon = pokemon,
+                modifier = Modifier
+                    .onPlaced {
+                        with(density) {
+                            if (desiredItemMinHeight < it.size.height.toDp()) {
+                                desiredItemMinHeight = it.size.height.toDp()
+                            }
+                        }
+                    }
+                    .defaultMinSize(minHeight = desiredItemMinHeight),
+            )
         }
     }
 }
 
 @Composable
-private fun PokemonItem(pokemon: PokemonModel) {
+private fun PokemonItem(
+    pokemon: PokemonModel,
+    modifier: Modifier = Modifier
+) {
     Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxSize(),
+        modifier = modifier
+            .fillMaxWidth().wrapContentHeight()
+            .padding(8.dp),
         colors = CardDefaults.cardColors().copy(
             containerColor = Color.DarkGray
         )
     ) {
         Box(
-            contentAlignment = Alignment.BottomEnd
+            modifier = Modifier.fillMaxHeight()
         ) {
+            PokemonImage(
+                url = pokemon.image.thumbnail,
+                modifier = Modifier.align(Alignment.BottomEnd)
+            )
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -114,9 +142,6 @@ private fun PokemonItem(pokemon: PokemonModel) {
                         vertical = 18.dp,
                     )
             ) {
-                PokemonImage(
-                    url = pokemon.image.thumbnail
-                )
                 Text(
                     text = pokemon.name.english,
                     color = Color.White,
@@ -154,13 +179,17 @@ private fun PokemonImage(
     url: String,
     modifier: Modifier = Modifier,
 ) {
-    AsyncImage(
-        model = ImageRequest.Builder(LocalPlatformContext.current)
-            .data(url)
-            .build(),
-        contentDescription = null,
-        modifier = Modifier
-            .size(40.dp)
-    )
+    Box(modifier = modifier.padding(top = 40.dp)) {
+        KamelImage(
+            resource = asyncPainterResource(url),
+            contentDescription = null,
+            modifier = modifier
+                .padding(
+                    end = 12.dp,
+                    bottom = 18.dp,
+                )
+                .size(80.dp)
+        )
+    }
 }
 
