@@ -1,17 +1,16 @@
-package com.carlosgub.pokedex.domain.model
+package com.carlosgub.pokedex.data.datasource.remote.response
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PokemonModel(
+data class PokemonResponse(
     val id: Int,
-    val name: NameModel,
-    val image: ImageModel,
-    val type: List<String>,
-    val color: Long,
-) {
+    val name: NameResponse,
+    val image: ImageResponse,
+    val type: List<String>
+){
     @Serializable
-    data class NameModel(
+    data class NameResponse(
         val english: String,
         val japanese: String,
         val chinese: String,
@@ -19,7 +18,7 @@ data class PokemonModel(
     )
 
     @Serializable
-    data class ImageModel(
+    data class ImageResponse(
         val thumbnail: String
     )
 }
