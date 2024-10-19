@@ -13,4 +13,4 @@ getPokemonList:
 
 insert:
     INSERT INTO Pokemon
-    VALUES(?,?,?,?,?);
+    VALUES ?;

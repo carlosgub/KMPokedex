@@ -18,11 +18,13 @@ class PokemonLocalDataSource(
         pokemonList.forEach { pokemon ->
             try {
                 sharedDatabase().pokemonQueries.insert(
-                    id = pokemon.id.toLong(),
-                    color = pokemon.color,
-                    image = pokemon.image,
-                    name = pokemon.name,
-                    type = Json.encodeToString(pokemon.type)
+                    Pokemon(
+                        id = pokemon.id.toLong(),
+                        color = pokemon.color,
+                        image = pokemon.image,
+                        name = pokemon.name,
+                        type = Json.encodeToString(pokemon.type)
+                    )
                 )
             } catch (ex: Exception) {
                 // DO NOTHING
