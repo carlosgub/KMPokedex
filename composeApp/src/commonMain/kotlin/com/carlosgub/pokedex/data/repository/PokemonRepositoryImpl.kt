@@ -9,12 +9,8 @@ class PokemonRepositoryImpl(
     private val pokemonRemoteDataSource: PokemonRemoteDataSource,
 ) : PokemonRepository {
     override suspend fun getPokemonList(): List<PokemonModel> =
-        try {
-            pokemonRemoteDataSource.getPokemonList().pokemonList.map { pokemonResponse ->
-                pokemonResponse.toPokemonModel()
-            }
-        } catch (ex: Exception) {
-            listOf()
+        pokemonRemoteDataSource.getPokemonList().pokemonList.map { pokemonResponse ->
+            pokemonResponse.toPokemonModel()
         }
 
 }
