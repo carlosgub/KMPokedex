@@ -167,8 +167,10 @@ private fun PokemonImage(
     url: String,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier.padding(top = 60.dp),
-        contentAlignment = Alignment.BottomEnd) {
+    Box(
+        modifier = modifier.padding(top = 60.dp),
+        contentAlignment = Alignment.BottomEnd
+    ) {
         Image(
             painter = painterResource(Res.drawable.pokeball),
             contentDescription = null,
