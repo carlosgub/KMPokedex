@@ -12,7 +12,7 @@ class PokemonRemoteDataSource(
 
     suspend fun getPokemonList(): PokemonListResponse =
         try {
-            httpClient.get("http://10.0.2.2:3000/api/pokedexlist")
+            httpClient.get("http://192.168.68.52:3000/api/pokedexlist")
                 .body()
         }catch (ex:Exception){
             PokemonListResponse(listOf())
